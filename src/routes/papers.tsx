@@ -36,7 +36,7 @@ function PapersPage() {
   const navigate = useNavigate({ from: "/papers" });
 
   const update = (patch: Record<string, string>) => {
-    navigate({ search: (prev) => ({ ...prev, ...patch }) });
+    navigate({ search: (prev: Record<string, string>) => ({ ...prev, ...patch }) });
   };
 
   const filtered = useMemo(() => {
