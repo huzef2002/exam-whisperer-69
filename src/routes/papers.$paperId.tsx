@@ -116,7 +116,7 @@ Topics covered: ${paper.topics.join(", ")}`;
               <span className="inline-flex items-center gap-1.5"><BookOpen className="h-4 w-4" /> {paper.branch}</span>
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
-              {paper.topics.map((t) => (
+              {paper.topics.map((t: string) => (
                 <span key={t} className="rounded-full bg-accent text-accent-foreground px-3 py-1 text-xs font-medium">{t}</span>
               ))}
             </div>
