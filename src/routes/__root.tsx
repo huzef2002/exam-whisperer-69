@@ -1,8 +1,6 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-
-import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -27,46 +25,9 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ExamPrep AI — Smart Exam Preparation with Previous Year Papers" },
-      {
-        name: "description",
-        content:
-          "Search, view and download previous year question papers. Use AI to summarize papers, find repeated questions, and chat for explanations.",
-      },
-      { property: "og:title", content: "ExamPrep AI — Smart Exam Preparation with Previous Year Papers" },
-      { property: "og:description", content: "ExamPrep AI is an AI-powered web platform for college students to prepare for exams using past papers." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "ExamPrep AI — Smart Exam Preparation with Previous Year Papers" },
-      { name: "description", content: "ExamPrep AI is an AI-powered web platform for college students to prepare for exams using past papers." },
-      { name: "twitter:description", content: "ExamPrep AI is an AI-powered web platform for college students to prepare for exams using past papers." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b4b76abf-0742-441b-92c3-f8a88c78d540/id-preview-306c0e2f--79f592e1-cf55-4090-bd1e-923a71d18ad8.lovable.app-1777710677410.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b4b76abf-0742-441b-92c3-f8a88c78d540/id-preview-306c0e2f--79f592e1-cf55-4090-bd1e-923a71d18ad8.lovable.app-1777710677410.png" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "stylesheet", href: appCss }],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   return (
