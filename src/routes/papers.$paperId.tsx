@@ -7,8 +7,8 @@ import { aiChat } from "@/server/ai.functions";
 import { Markdown } from "@/components/Markdown";
 
 export const Route = createFileRoute("/papers/$paperId")({
-  loader: ({ params }) => {
-    const paper = getPaper(params.paperId);
+  loader: async ({ params }) => {
+    const paper = await getPaper(params.paperId);
     if (!paper) throw notFound();
     return { paper };
   },

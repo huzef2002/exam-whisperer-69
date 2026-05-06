@@ -4,7 +4,7 @@ import { z } from "zod";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { useMemo } from "react";
 import { PaperCard } from "@/components/PaperCard";
-import { papers, branches, years, universities } from "@/data/papers";
+import { getPapers, getBranches, getYears, getUniversities } from "@/data/papers";
 import {
   Select,
   SelectContent,
@@ -21,6 +21,13 @@ const searchSchema = z.object({
 });
 
 export const Route = createFileRoute("/papers")({
+  loader: async () => {
+    const papers = await getPapers();
+    const universities = await getUniversities();
+    const branches = await getBranches();
+    const years = await getYears();
+    return { papers, universities, branches, years };
+  },
   validateSearch: zodValidator(searchSchema),
   head: () => ({
     meta: [
@@ -33,6 +40,7 @@ export const Route = createFileRoute("/papers")({
 
 function PapersPage() {
   const { q, branch, year, university } = Route.useSearch();
+  const loaderData = Route.useLoaderData();
   const navigate = useNavigate({ from: "/papers" });
 
   const update = (patch: Record<string, string>) => {
@@ -40,7 +48,7 @@ function PapersPage() {
   };
 
   const filtered = useMemo(() => {
-    return papers.filter((p) => {
+    return loaderData.papers.filter((p) => {
       const matchQ =
         !q ||
         p.subject.toLowerCase().includes(q.toLowerCase()) ||
@@ -51,7 +59,7 @@ function PapersPage() {
       const matchUni = university === "All Universities" || p.university === university;
       return matchQ && matchBranch && matchYear && matchUni;
     });
-  }, [q, branch, year, university]);
+  }, [q, branch, year, university, loaderData.papers]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
@@ -71,9 +79,9 @@ function PapersPage() {
           />
         </div>
         <div className="grid sm:grid-cols-3 gap-3 border-t border-border/60 pt-4">
-          <FilterSelect label="Branch" value={branch} options={branches} onChange={(v) => update({ branch: v })} />
-          <FilterSelect label="Year" value={year} options={years} onChange={(v) => update({ year: v })} />
-          <FilterSelect label="University" value={university} options={universities} onChange={(v) => update({ university: v })} />
+          <FilterSelect label="Branch" value={branch} options={["All Branches", ...loaderData.branches]} onChange={(v) => update({ branch: v })} />
+          <FilterSelect label="Year" value={year} options={["All Years", ...loaderData.years]} onChange={(v) => update({ year: v })} />
+          <FilterSelect label="University" value={university} options={["All Universities", ...loaderData.universities]} onChange={(v) => update({ university: v })} />
         </div>
       </div>
 

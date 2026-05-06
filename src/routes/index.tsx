@@ -3,9 +3,13 @@ import { Search, Sparkles, BookOpen, Brain, MessageSquare, ArrowRight, TrendingU
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { PaperCard } from "@/components/PaperCard";
-import { papers } from "@/data/papers";
+import { getPapers } from "@/data/papers";
 
 export const Route = createFileRoute("/")({
+  loader: async () => {
+    const papers = await getPapers();
+    return { papers };
+  },
   head: () => ({
     meta: [
       { title: "ExamPrep AI — Smart Exam Preparation with Previous Year Papers" },
@@ -22,7 +26,8 @@ export const Route = createFileRoute("/")({
 function HomePage() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  const featured = papers.slice(0, 6);
+  const loaderData = Route.useLoaderData();
+  const featured = loaderData.papers.slice(0, 6);
 
   const onSearch = (e: React.FormEvent) => {
     e.preventDefault();

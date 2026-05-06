@@ -42,7 +42,9 @@ export function PaperCard({ paper }: { paper: Paper }) {
 
       <div className="mt-5 flex items-center gap-2">
         <Button asChild size="sm" className="flex-1">
-          <Link to="/papers/$paperId" params={{ paperId: paper.id }}>Open</Link>
+          <a href={paper.pdfUrl}>
+            Open
+          </a>
         </Button>
         <Button asChild variant="soft" size="sm">
           <a href={paper.pdfUrl} download aria-label="Download PDF">
