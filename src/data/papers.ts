@@ -73,7 +73,7 @@ export async function getPapers(): Promise<Paper[]> {
     return [];
   }
 
-  return data.map(p => ({
+  return data.map((p: Paper) => ({
     id: p.id,
     subject: p.subject,
     code: p.code,
@@ -101,7 +101,7 @@ export async function getPaper(id: string): Promise<Paper | null> {
     return null;
   }
 
-  return {
+  return { 
     id: data.id,
     subject: data.subject,
     code: data.code,
@@ -140,7 +140,7 @@ export async function filterPapers(filters: {
     return [];
   }
 
-  return data.map(p => ({
+  return data.map((p: any) => ({
     id: p.id,
     subject: p.subject,
     code: p.code,
@@ -169,57 +169,4 @@ export async function filterPapers(filters: {
 //     downloads: 12480,
 //     pdfUrl: "https://www.africau.edu/images/default/sample.pdf",
 //     topics: ["Trees", "Graphs", "Dynamic Programming", "Sorting"],
-//   },
-//   {
-//     id: "p2",
-//     subject: "Operating Systems",
-//     code: "CS-401",
-//     year: 2023,
-//     university: "Mumbai University",
-//     branch: "Computer Science",
-//     semester: "Sem 4",
-//     difficulty: "Medium",
-//     downloads: 9230,
-//     pdfUrl: "https://www.africau.edu/images/default/sample.pdf",
-//     topics: ["Processes", "Scheduling", "Memory", "File Systems"],
-//   },
-//   {
-//     id: "p3",
-//     subject: "Database Management",
-//     code: "CS-402",
-//     year: 2024,
-//     university: "Anna University",
-//     branch: "Computer Science",
-//     semester: "Sem 4",
-//     difficulty: "Medium",
-//     downloads: 8410,
-//     pdfUrl: "https://www.africau.edu/images/default/sample.pdf",
-//     topics: ["SQL", "Normalization", "Transactions", "Indexing"],
-//   },
-//   {
-//     id: "p4",
-//     subject: "Engineering Mathematics III",
-//     code: "MA-301",
-//     year: 2023,
-//     university: "Pune University",
-//     branch: "Mathematics",
-//     semester: "Sem 3",
-//     difficulty: "Hard",
-//     downloads: 15670,
-//     pdfUrl: "https://www.africau.edu/images/default/sample.pdf",
-//     topics: ["Laplace", "Fourier", "PDE", "Complex Analysis"],
-//   },
-//   {
-//     id: "p5",
-//     subject: "Digital Electronics",
-//     code: "EC-202",
-//     year: 2022,
-//     university: "Bangalore University",
-//     branch: "Electronics",
-//     semester: "Sem 2",
-//     difficulty: "Easy",
-//     downloads: 6120,
-//     pdfUrl: "https://www.africau.edu/images/default/sample.pdf",
-//     topics: ["Boolean Algebra", "K-Maps", "Flip-Flops", "Counters"],
-//   },
-// ];
+//   }  ];

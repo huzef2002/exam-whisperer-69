@@ -42,12 +42,12 @@ export function PaperCard({ paper }: { paper: Paper }) {
 
       <div className="mt-5 flex items-center gap-2">
         <Button asChild size="sm" className="flex-1">
-          <a href={paper.pdfUrl}>
+          <a href={paper.pdfUrl} target="_blank" aria-label="Open PDF">
             Open
           </a>
         </Button>
         <Button asChild variant="soft" size="sm">
-          <a href={paper.pdfUrl} download aria-label="Download PDF">
+          <a href={paper.pdfUrl} target="black" download={paper.pdfUrl} aria-label="Download PDF">
             <Download className="h-4 w-4" />
           </a>
         </Button>
